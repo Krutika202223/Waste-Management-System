@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}FAQ{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-5">Frequently Asked Questions</h1>
+    
+    <div class="accordion" id="faqAccordion">
+        {% for faq in faqs %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{ forloop.counter }}">
+                    {{ faq.question }}
+                </button>
+            </h2>
+            <div id="faq{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    {{ faq.answer }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="text-center mt-5">
+        <h4>Still have questions?</h4>
+        <p class="text-muted">Feel free to reach out to us</p>
+        <a href="{% url 'contact' %}" class="btn btn-success btn-lg">
+            <i class="fas fa-envelope"></i> Contact Us
+        </a>
+    </div>
+</div>
+{% endblock %}
